@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.AikidoMusubi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/indigo_blue</item>
-        <item name="colorPrimaryVariant">@color/indigo_blue_dark</item>
-        <item name="colorOnPrimary">@color/pure_white</item>
+        <item name="colorPrimaryVariant">@color/indigo_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/indigo_accent</item>
-        <item name="colorOnSecondary">@color/pure_white</item>
-        <item name="android:windowBackground">@color/onyx</item>
-        <item name="android:statusBarColor">@color/onyx</item>
-        <item name="android:navigationBarColor">@color/onyx</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

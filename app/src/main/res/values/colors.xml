@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Indigo palette -->
-    <color name="indigo_blue">#3949AB</color>
-    <color name="indigo_blue_light">#6F74DD</color>
-    <color name="indigo_blue_dark">#00227B</color>
-    <color name="indigo_accent">#536DFE</color>
-    <color name="indigo_soft">#8C9EFF</color>
-
-    <!-- Dark backgrounds -->
-    <color name="onyx">#0D0D0D</color>
+    <color name="bg_dark">#0D0D0D</color>
     <color name="charcoal_dark">#1A1A2E</color>
-    <color name="charcoal_mid">#16213E</color>
     <color name="charcoal_surface">#1F2041</color>
     <color name="surface_variant">#252547</color>
-
-    <!-- Text -->
-    <color name="pure_white">#FFFFFF</color>
+    <color name="indigo_blue">#3949AB</color>
+    <color name="indigo_accent">#536DFE</color>
+    <color name="indigo_soft">#8C9EFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="off_white">#F5F5F7</color>
     <color name="white_muted">#BDBDBD</color>
-
-    <!-- Status -->
     <color name="success_green">#00E676</color>
     <color name="error_red">#FF1744</color>
     <color name="warn_amber">#FFAB00</color>
+    <color name="divider">#33FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

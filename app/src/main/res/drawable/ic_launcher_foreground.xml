@@ -1,36 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-
-    <!-- Outer circle ring -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#6F74DD"
-        android:strokeWidth="4"
-        android:pathData="M54,20 A34,34 0 1,1 53.99,20" />
-
-    <!-- Inner dot representing Hara / center -->
-    <path
-        android:fillColor="#3949AB"
-        android:pathData="M54,48 A6,6 0 1,1 53.99,48" />
-
-    <!-- Flowing arc - left (Musubi spiral) -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#8C9EFF"
-        android:strokeWidth="3"
-        android:strokeLineCap="round"
-        android:pathData="M30,54 Q36,34 54,42 Q72,50 68,70" />
-
-    <!-- Flowing arc - right (Musubi spiral) -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#536DFE"
-        android:strokeWidth="3"
-        android:strokeLineCap="round"
-        android:pathData="M78,54 Q72,74 54,66 Q36,58 40,38" />
-
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:strokeColor="#6F74DD" android:strokeWidth="4" android:fillColor="#00000000"
+        android:pathData="M54,20 A34,34 0 1,1 53.99,20"/>
+    <path android:fillColor="#3949AB" android:pathData="M54,48 A6,6 0 1,1 53.99,48"/>
 </vector>
