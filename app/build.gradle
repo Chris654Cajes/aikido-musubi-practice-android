@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'org.jetbrains.kotlin.plugin.compose'
     id 'com.google.devtools.ksp'
 }
 
@@ -15,11 +14,7 @@ android {
         targetSdk 35
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     buildTypes {
@@ -36,7 +31,7 @@ android {
         jvmTarget = '17'
     }
     buildFeatures {
-        compose true
+        viewBinding true
     }
     packaging {
         resources {
@@ -46,20 +41,23 @@ android {
 }
 
 dependencies {
-    def composeBom = platform('androidx.compose:compose-bom:2025.03.00')
-    implementation composeBom
-
     implementation 'androidx.core:core-ktx:1.15.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.activity:activity-ktx:1.10.1'
+    implementation 'androidx.fragment:fragment-ktx:1.8.5'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
-    implementation 'androidx.activity:activity-compose:1.10.1'
-    implementation 'androidx.compose.ui:ui'
-    implementation 'androidx.compose.ui:ui-graphics'
-    implementation 'androidx.compose.ui:ui-tooling-preview'
-    implementation 'androidx.compose.material3:material3'
-    implementation 'androidx.compose.material:material-icons-extended'
-    implementation 'androidx.navigation:navigation-compose:2.8.9'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
+
+    // Material Components (replaces Compose Material3)
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // RecyclerView + CardView
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // ConstraintLayout / NestedScrollView
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.core:core-ktx:1.15.0'
 
     // Room DB
     implementation 'androidx.room:room-runtime:2.6.1'
@@ -72,17 +70,10 @@ dependencies {
     implementation 'androidx.camera:camera-lifecycle:1.4.2'
     implementation 'androidx.camera:camera-view:1.4.2'
 
-    // ML Kit Pose Detection - base only (accurate model removed to reduce dex size)
+    // ML Kit Pose Detection
     implementation 'com.google.mlkit:pose-detection:18.0.0-beta5'
-
-    // Accompanist for permissions
-    implementation 'com.google.accompanist:accompanist-permissions:0.37.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-    androidTestImplementation composeBom
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
 }

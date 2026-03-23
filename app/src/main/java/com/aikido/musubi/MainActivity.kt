@@ -1,53 +1,59 @@
 package com.aikido.musubi
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.aikido.musubi.ui.AikidoNavHost
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.aikido.musubi.databinding.ActivityMainBinding
 import com.aikido.musubi.ui.PracticeViewModel
-import com.aikido.musubi.ui.theme.AikidoMusubiTheme
-import com.aikido.musubi.ui.theme.Onyx
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
+import com.aikido.musubi.ui.screens.CameraPermissionFragment
+import com.aikido.musubi.ui.screens.HomeFragment
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
-    @OptIn(ExperimentalPermissionsApi::class)
+    private lateinit var binding: ActivityMainBinding
+    lateinit var viewModel: PracticeViewModel
+
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) showHome() else showPermissionScreen()
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val app = application as AikidoApp
+        viewModel = ViewModelProvider(
+            this,
+            PracticeViewModel.Factory(app.repository)
+        )[PracticeViewModel::class.java]
 
-        setContent {
-            AikidoMusubiTheme(darkTheme = true) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color    = Onyx
-                ) {
-                    val cameraPermission = rememberPermissionState(
-                        android.Manifest.permission.CAMERA
-                    )
-
-                    val vm: PracticeViewModel = viewModel(
-                        factory = PracticeViewModel.Factory(app.repository)
-                    )
-
-                    if (cameraPermission.status.isGranted) {
-                        AikidoNavHost(viewModel = vm)
-                    } else {
-                        CameraPermissionScreen(
-                            onRequestPermission = { cameraPermission.launchPermissionRequest() }
-                        )
-                    }
-                }
-            }
+        if (savedInstanceState == null) {
+            if (hasCameraPermission()) showHome()
+            else showPermissionScreen()
         }
+    }
+
+    private fun hasCameraPermission() =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_GRANTED
+
+    fun requestCameraPermission() = requestPermission.launch(Manifest.permission.CAMERA)
+
+    fun showHome() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, HomeFragment())
+            .commit()
+    }
+
+    private fun showPermissionScreen() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, CameraPermissionFragment())
+            .commit()
     }
 }
